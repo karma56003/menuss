@@ -25,27 +25,40 @@ function normalizePhone(value) {
   return null;
 }
 
-export function validateLead(input) {
-  if (!input || typeof input !== 'object' || Array.isArray(input)) return null;
+function parseLead(input) {
+  if (!input || typeof input !== 'object' || Array.isArray(input)) {
+    return { error: 'Los datos enviados no tienen un formato válido.' };
+  }
+
   const nombre = cleanText(input.nombre, 100);
   const negocio = cleanText(input.negocio, 120);
   const email = cleanText(input.email, 180).toLowerCase();
   const ciudad = cleanText(input.ciudad, 80);
   const telefono = normalizePhone(input.telefono);
   const plan = input.plan;
+  const errors = [];
 
-  if (nombre.length < 2 || nombre.length > 100 || negocio.length < 2 || negocio.length > 120 || ciudad.length < 2 || ciudad.length > 80) return null;
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || email.length > 180) return null;
-  if (!telefono || !Object.hasOwn(PLANES, plan) || input.consentimiento !== true) return null;
-  if (typeof input.consentimiento_sms !== 'boolean') return null;
+  if (nombre.length < 2 || nombre.length > 100) errors.push('el nombre debe tener entre 2 y 100 caracteres');
+  if (negocio.length < 2 || negocio.length > 120) errors.push('el negocio debe tener entre 2 y 120 caracteres');
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || email.length > 180) errors.push('el correo no parece válido');
+  if (!telefono) errors.push('el celular debe tener 8 dígitos bolivianos que comiencen con 6 o 7, o un número internacional con +');
+  if (ciudad.length < 2 || ciudad.length > 80) errors.push('la ciudad debe tener entre 2 y 80 caracteres');
+  if (!Object.hasOwn(PLANES, plan)) errors.push('selecciona uno de los planes disponibles');
+  if (input.consentimiento !== true) errors.push('acepta el consentimiento para guardar tus datos');
+  if (typeof input.consentimiento_sms !== 'boolean') errors.push('la opción de SMS no es válida');
+  if (errors.length) return { error: `Revisa el formulario: ${errors.join('; ')}.` };
 
-  return {
+  return { registro: {
     nombre, negocio, email, telefono, ciudad,
     plan, precio_bs: PLANES[plan],
     consentimiento: true,
     consentimiento_sms: input.consentimiento_sms,
     origen: 'landing',
-  };
+  } };
+}
+
+export function validateLead(input) {
+  return parseLead(input).registro || null;
 }
 
 async function sendSms(registro) {
@@ -91,10 +104,11 @@ export async function POST(request) {
       return response(201, { ok: true });
     }
 
-    const registro = validateLead(payload);
-    if (!registro) {
-      return response(400, { error: 'Revisa nombre, negocio, correo, celular, plan y consentimiento.' });
+    const validation = parseLead(payload);
+    if (!validation.registro) {
+      return response(400, { error: validation.error });
     }
+    const { registro } = validation;
 
     const { SUPABASE_URL: url, SUPABASE_SECRET_KEY: key } = process.env;
     if (!url || !key || key.startsWith('sb_publishable_')) {

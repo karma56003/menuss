@@ -75,6 +75,15 @@ test('responde a preflight solo para el mismo origen', () => {
 test('rechaza email inválido', async () => {
   const result = await POST(request({ ...valid, email: 'invalido' }));
   assert.equal(result.status, 400);
+  assert.match((await result.json()).error, /correo no parece válido/);
+});
+
+test('indica qué campos corregir en un registro incompleto', async () => {
+  const result = await POST(request({ ...valid, telefono: '123', consentimiento: false }));
+  assert.equal(result.status, 400);
+  const data = await result.json();
+  assert.match(data.error, /celular debe tener 8 dígitos bolivianos/);
+  assert.match(data.error, /acepta el consentimiento/);
 });
 
 test('guarda la inscripción en Supabase', async () => withFakeServices(async () => {
