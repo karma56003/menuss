@@ -64,6 +64,8 @@ Si ya tienes un repositorio para esta página, no repitas `git init`: incorpora 
 4. Pulsa **Deploy**. Vercel te dará una dirección pública `https://....vercel.app`; los próximos cambios a la rama conectada se desplegarán automáticamente.
 5. Después de cambiar variables, ejecuta un nuevo despliegue. Nunca subas tus claves reales a GitHub.
 
+Usa la clave **Secret** (`sb_secret_...`) en `SUPABASE_SECRET_KEY`; la clave **Publishable** (`sb_publishable_...`) es pública y no permite esta escritura. Si ya configuraste una clave publishable, reemplázala por la Secret en Vercel y vuelve a desplegar. En Supabase, ejecuta `supabase.sql` y confirma que `public.inscripciones` está expuesta en **Integrations > Data API**.
+
 ## 4. Configurar SMS opcional con Twilio
 
 1. Abre [Twilio Console](https://console.twilio.com/) y obtén un remitente/número apto para SMS al país de tus destinatarios.
@@ -85,6 +87,17 @@ Los modelos son **reconstrucciones geométricas ilustrativas** hechas en JavaScr
 
 ## 5. Verificar el funcionamiento
 
+Para probar también el formulario **en local**, no uses `npm run serve:static`: ese comando sirve archivos estáticos y no ejecuta `api/registrar.mjs`. Usa Vercel CLI, que levanta la página y la función:
+
+```bash
+npx vercel login
+npx vercel link
+npx vercel env pull .env.local
+npm run dev
+```
+
+En `vercel env pull`, selecciona el entorno **Development**. `npm run dev` debe mostrar una URL local; envía el formulario desde esa URL, no desde el puerto del servidor estático. Asegúrate de que las variables de Supabase estén configuradas para Development en Vercel y que `SUPABASE_SECRET_KEY` sea la clave Secret del servidor. `.env.local` está excluido de Git.
+
 1. Abre la URL desplegada en celular y computadora.
 2. Verifica que los dos platos del visor 3D puedan girarse, ampliarse y alternarse si el dispositivo tiene WebGL habilitado.
 3. Haz clic en cada plan. Debe seleccionarse el mismo en el formulario.
@@ -102,7 +115,9 @@ limit 20;
 7. Si habilitaste Twilio, prueba desde un número admitido y con consentimiento expreso.
 8. Ejecuta `npm test` localmente con Node.js 20 o superior para probar el registro sin enviar información real.
 
-**Nota:** si abres `index.html` con doble clic o usas un servidor exclusivamente estático, la página se verá, pero el formulario solo guardará datos cuando `/api/registrar` esté desplegado en Vercel (o un entorno compatible).
+**Nota:** si abres `index.html` con doble clic o usas `npm run serve:static`, la página se verá, pero el formulario no tendrá una función API que procese el registro. Usa `npm run dev` para ejecutar la función localmente.
+
+**Si no ves la navegación:** en pantallas anchas aparece la barra de enlaces; en pantallas de hasta 900 px aparece el botón de menú ☰, que despliega los enlaces al tocarlo. El formulario requiere el endpoint `/api/registrar` y las variables de Supabase configuradas en el entorno de Vercel que estás visitando; revisa los registros de la función en Vercel si el envío sigue fallando.
 
 ## Alcance y seguridad
 

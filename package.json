@@ -5,6 +5,7 @@
   "type": "module",
   "description": "Landing de acceso anticipado de PLATIA: HTML, CSS, JavaScript, Supabase y Twilio.",
   "scripts": {
+    "dev": "npx vercel dev",
     "test": "node --test",
     "serve:static": "npx serve ."
   },

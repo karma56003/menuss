@@ -121,7 +121,7 @@ form.addEventListener('submit', async (event) => {
     const result = await response.json().catch(() => ({}));
 
     if (!response.ok) {
-      throw new Error(result.error || 'No pudimos guardar tu registro. Intenta nuevamente.');
+      throw new Error(result.error || `No pudimos guardar tu registro (HTTP ${response.status}). Intenta nuevamente.`);
     }
 
     feedback.textContent = '¡Inscripción recibida! Guardamos tus datos y el plan que elegiste. Te contactaremos cuando haya novedades.';

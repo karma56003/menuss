@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import registrar, { validateLead } from './api/registrar.mjs';
+import { GET, OPTIONS, POST, validateLead } from './api/registrar.mjs';
 
 const valid = {
   nombre: 'María Castro', negocio: 'Café La Plaza', email: 'MAria@ejemplo.com',
@@ -52,13 +52,28 @@ test('valida el plan y normaliza el celular boliviano', () => {
   assert.equal(validateLead({ ...valid, consentimiento: false }), null);
 });
 
-test('solo admite POST', async () => {
-  const result = await registrar.fetch(request(undefined, 'GET'));
+test('declara POST y rechaza GET con un mensaje útil', async () => {
+  const result = GET(request(undefined, 'GET'));
   assert.equal(result.status, 405);
+  assert.match((await result.json()).error, /recibió GET/);
+});
+
+test('responde a preflight solo para el mismo origen', () => {
+  const sameOrigin = OPTIONS(new Request('https://platia.vercel.app/api/registrar', {
+    method: 'OPTIONS',
+    headers: { Origin: 'https://platia.vercel.app' },
+  }));
+  const otherOrigin = OPTIONS(new Request('https://platia.vercel.app/api/registrar', {
+    method: 'OPTIONS',
+    headers: { Origin: 'https://otro.example' },
+  }));
+  assert.equal(sameOrigin.status, 204);
+  assert.equal(sameOrigin.headers.get('Access-Control-Allow-Origin'), 'https://platia.vercel.app');
+  assert.equal(otherOrigin.headers.has('Access-Control-Allow-Origin'), false);
 });
 
 test('rechaza email inválido', async () => {
-  const result = await registrar.fetch(request({ ...valid, email: 'invalido' }));
+  const result = await POST(request({ ...valid, email: 'invalido' }));
   assert.equal(result.status, 400);
 });
 
@@ -68,20 +83,30 @@ test('guarda la inscripción en Supabase', async () => withFakeServices(async ()
     calls.push({ url, options });
     return new Response(null, { status: 201 });
   };
-  const result = await registrar.fetch(request(valid));
+  const result = await POST(request(valid));
   assert.equal(result.status, 201);
   assert.equal(calls.length, 1);
   assert.equal(calls[0].url, 'https://example.supabase.co/rest/v1/inscripciones');
   assert.equal(calls[0].options.headers.apikey, 'sb_secret_test');
+  assert.equal(calls[0].options.headers.Authorization, `Bearer ${calls[0].options.headers.apikey}`);
   const saved = JSON.parse(calls[0].options.body);
   assert.equal(saved.plan, 'interactivo');
   assert.equal(saved.precio_bs, 49);
   assert.equal(saved.telefono, '+59171234567');
 }));
 
+test('rechaza una clave publishable como credencial del servidor', async () => withFakeServices(async () => {
+  process.env.SUPABASE_SECRET_KEY = 'sb_publishable_test';
+  globalThis.fetch = async () => {
+    throw new Error('No debe llamar a Supabase con una clave publishable.');
+  };
+  const result = await POST(request(valid));
+  assert.equal(result.status, 503);
+}));
+
 test('correo duplicado responde 409', async () => withFakeServices(async () => {
   globalThis.fetch = async () => Response.json({ code: '23505' }, { status: 409 });
-  const result = await registrar.fetch(request(valid));
+  const result = await POST(request(valid));
   assert.equal(result.status, 409);
   assert.match((await result.json()).error, /ya está registrado/);
 }));
@@ -97,7 +122,7 @@ test('SMS solo con consentimiento y configuración', async () => withFakeService
       ? Response.json({ sid: 'SM_test' }, { status: 201 })
       : new Response(null, { status: 201 });
   };
-  const result = await registrar.fetch(request({ ...valid, consentimiento_sms: true }));
+  const result = await POST(request({ ...valid, consentimiento_sms: true }));
   assert.equal(result.status, 201);
   assert.equal(calls.length, 2);
   assert.match(calls[1].url, /api\.twilio\.com/);
@@ -111,6 +136,6 @@ test('un error de Twilio no borra el registro', async () => withFakeServices(asy
   globalThis.fetch = async (url) => String(url).includes('twilio')
     ? Response.json({ message: 'no disponible' }, { status: 400 })
     : new Response(null, { status: 201 });
-  const result = await registrar.fetch(request({ ...valid, consentimiento_sms: true }));
+  const result = await POST(request({ ...valid, consentimiento_sms: true }));
   assert.equal(result.status, 201);
 }));

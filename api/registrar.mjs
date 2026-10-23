@@ -71,11 +71,7 @@ async function sendSms(registro) {
   return true;
 }
 
-export default {
-  async fetch(request) {
-    if (request.method !== 'POST') {
-      return new Response(null, { status: 405, headers: { Allow: 'POST' } });
-    }
+export async function POST(request) {
 
     if (!request.headers.get('content-type')?.toLowerCase().startsWith('application/json')) {
       return response(415, { error: 'El formulario debe enviarse en JSON.' });
@@ -101,8 +97,10 @@ export default {
     }
 
     const { SUPABASE_URL: url, SUPABASE_SECRET_KEY: key } = process.env;
-    if (!url || !key) {
-      console.error('Falta configuración de Supabase.');
+    if (!url || !key || key.startsWith('sb_publishable_')) {
+      console.error(key?.startsWith('sb_publishable_')
+        ? 'SUPABASE_SECRET_KEY no puede ser una clave publishable.'
+        : 'Falta configuración de Supabase.');
       return response(503, { error: 'El registro aún no está disponible. Intenta más tarde.' });
     }
 
@@ -111,6 +109,7 @@ export default {
         method: 'POST',
         headers: {
           apikey: key,
+          Authorization: `Bearer ${key}`,
           'Content-Type': 'application/json',
           Prefer: 'return=minimal',
         },
@@ -141,5 +140,23 @@ export default {
       console.error('Error de red durante el registro:', error.name);
       return response(502, { error: 'No pudimos conectarnos. Intenta otra vez en unos minutos.' });
     }
-  },
-};
+}
+
+export function GET(request) {
+  return response(405, {
+    error: `El endpoint recibió ${request.method}; debe recibir POST. Revisa si el dominio redirige la solicitud.`,
+  });
+}
+
+export function OPTIONS(request) {
+  const headers = {
+    Allow: 'POST, OPTIONS',
+    'Access-Control-Allow-Methods': 'POST, OPTIONS',
+    'Access-Control-Allow-Headers': 'Content-Type',
+  };
+  const origin = request.headers.get('origin');
+  if (origin === new URL(request.url).origin) {
+    headers['Access-Control-Allow-Origin'] = origin;
+  }
+  return new Response(null, { status: 204, headers });
+}
