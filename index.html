@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#30312e" />
+  <meta name="description" content="PLATIA: menú QR, pedidos por WhatsApp y experiencias gastronómicas 3D. Conoce nuestros planes de acceso anticipado desde Bs 29 al mes." />
+  <meta property="og:title" content="PLATIA | El menú del futuro está servido" />
+  <meta property="og:description" content="Moderniza tu restaurante con menús QR interactivos, pedidos ágiles y experiencias 3D. Inscríbete al acceso anticipado." />
+  <meta property="og:type" content="website" />
+  <title>PLATIA — Tu menú cobra vida</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/styles.css" />
+  <script type="importmap">{
+    "imports": {
+      "three": "/vendor/build/three.module.js",
+      "three/addons/": "/vendor/examples/jsm/"
+    }
+  }</script>
+  <script type="module" src="/script.js"></script>
+  <script type="module" src="/viewer-3d.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+  <div class="announcement"><span class="announcement-dot"></span>Estamos creando una nueva forma de explorar la gastronomía <span class="announcement-separator">—</span> <a href="#registro">Únete al acceso anticipado <span aria-hidden="true">↗</span></a></div>
+
+  <header class="site-header" id="inicio">
+    <div class="container nav-shell">
+      <a href="#inicio" class="brand" aria-label="PLATIA, inicio">
+        <span class="brand-symbol" aria-hidden="true"><svg viewBox="0 0 40 40" fill="none"><rect x="3" y="3" width="34" height="34" rx="12" stroke="currentColor" stroke-width="2"/><path d="M11 25.5h18M13 21.5c.5-7 3-10.5 7-10.5s6.5 3.5 7 10.5M18 9h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M15 29h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+        <span>PLA<span class="brand-accent">TIA</span><small>GASTRONOMÍA DIGITAL</small></span>
+      </a>
+      <nav class="desktop-nav" aria-label="Navegación principal">
+        <a href="#como-funciona">Cómo funciona</a>
+        <a href="#experiencia-3d">Experiencia 3D</a>
+        <a href="#beneficios">Beneficios</a>
+        <a href="#planes">Planes</a>
+        <a href="#preguntas">Preguntas</a>
+      </nav>
+      <a href="#registro" class="button button-dark nav-cta">Quiero registrarme <span aria-hidden="true">↗</span></a>
+      <button class="menu-toggle" type="button" aria-label="Abrir menú" aria-controls="mobile-menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+    <nav id="mobile-menu" class="mobile-menu" aria-label="Navegación móvil" hidden>
+      <a href="#como-funciona">Cómo funciona</a><a href="#experiencia-3d">Experiencia 3D</a><a href="#beneficios">Beneficios</a><a href="#planes">Planes</a><a href="#preguntas">Preguntas</a><a href="#registro">Registrarme</a>
+    </nav>
+  </header>
+
+  <main id="contenido">
+    <section class="hero">
+      <div class="hero-glow hero-glow-one" aria-hidden="true"></div>
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <div class="eyebrow"><span class="pulse-dot"></span> PARA RESTAURANTES QUE QUIEREN DESTACAR</div>
+          <h1>Tu menú merece <span>más que una foto.</span></h1>
+          <p class="hero-lead">Convierte cada mesa en una experiencia. Presenta tus platos con un menú QR atractivo, facilita pedidos y sorprende con el potencial del 3D.</p>
+          <div class="hero-actions">
+            <a class="button button-coral button-large" href="#planes">Descubrir los planes <span aria-hidden="true">↗</span></a>
+            <a class="text-link" href="#experiencia-3d"><span class="play-icon" aria-hidden="true">▶</span> Prueba el 3D interactivo</a>
+          </div>
+          <div class="hero-proof"><div class="proof-icons"><span>QR</span><span>3D</span><span>WA</span></div><p>Menú digital · Experiencia visual · Pedidos conectados</p></div>
+        </div>
+        <div class="hero-art" aria-label="Vista ilustrativa de un menú digital gastronómico">
+          <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
+          <div class="floating-card floating-card-top"><span class="floating-icon">✦</span><div><strong>Platos que enamoran</strong><small>Una experiencia más visual</small></div></div>
+          <div class="phone">
+            <div class="phone-notch"></div>
+            <div class="phone-content">
+              <div class="phone-top"><span>9:41</span><span>◕  ▰</span></div>
+              <div class="phone-brand"><span class="phone-mark">p.</span><span>LA TERRAZA<small>MENÚ DIGITAL</small></span><span class="phone-menu">☰</span></div>
+              <div class="phone-intro"><span class="mini-label">EL FAVORITO DE LA CASA</span><h3>Sabores para<br>recordar.</h3></div>
+              <div class="dish-scene"><div class="scene-halo"></div>
+                <img class="burger-art" src="/assets/platia-burger-3d.png" width="300" height="200" alt="Render tridimensional de una hamburguesa gourmet sobre un plato" fetchpriority="high" />
+              </div>
+              <div class="dish-info"><div><small>HAMBURGUESA DE AUTOR</small><h4>La Suprema</h4><p>Carne artesanal, queso cheddar y salsa especial</p></div><strong>Bs 38</strong></div>
+              <div class="phone-buttons"><a class="phone-3d" href="#experiencia-3d">✧ Ver en 3D <span>DEMO</span></a><div class="phone-cart">+ Agregar</div></div>
+            </div>
+          </div>
+          <div class="floating-card floating-card-bottom"><span class="qr-mini" aria-hidden="true"><svg viewBox="0 0 40 40"><path fill="currentColor" d="M1 1h14v14H1zm4 4v6h6V5zm20-4h14v14H25zm4 4v6h6V5zM1 25h14v14H1zm4 4v6h6v-6zm15-26h4v6h-4zm0 12h5v5h-5zm7 4h5v5h-5zm8 0h4v4h-4zm-15 7h5v5h-5zm7 1h5v5h-5zm8-2h4v14h-4zm-15 10h11v4H20z"/></svg></span><div><strong>Escanea y explora</strong><small>Sin descargar aplicaciones</small></div></div>
+          <div class="hero-star hero-star-one">✳</div><div class="hero-star hero-star-two">✦</div>
+        </div>
+      </div>
+      <div class="container hero-foot"><span>HECHO PARA TU NEGOCIO</span><div class="industry-list"><span>Restaurantes</span><span class="diamond">◆</span><span>Cafeterías</span><span class="diamond">◆</span><span>Hamburgueserías</span><span class="diamond">◆</span><span>Pizzerías</span></div></div>
+    </section>
+
+    <section class="section how" id="como-funciona">
+      <div class="container"><div class="section-head centered"><span class="section-tag">ASÍ DE SIMPLE</span><h2>Una experiencia que empieza <em>con un escaneo.</em></h2><p>De tu cocina a la pantalla del cliente, sin complicaciones ni aplicaciones que instalar.</p></div>
+        <div class="steps-grid">
+          <article class="step-card"><span class="step-num">01</span><div class="step-visual step-qr"><svg viewBox="0 0 96 96" fill="none" aria-hidden="true"><rect x="21" y="21" width="54" height="54" rx="10" fill="#fff"/><path d="M29 29h15v15H29zm4 4v7h7v-7zm19-4h15v15H52zm4 4v7h7v-7zM29 52h15v15H29zm4 4v7h7v-7zm20-4h5v6h-5zm10 0h5v5h-5zm-11 11h6v6h-6zm11-2h5v8h-5z" fill="#1d3d35"/><path d="M14 30v-9a7 7 0 0 1 7-7h9m36 0h9a7 7 0 0 1 7 7v9M14 66v9a7 7 0 0 0 7 7h9m36 0h9a7 7 0 0 0 7-7v-9" stroke="#e3b866" stroke-width="3" stroke-linecap="round"/></svg></div><h3>El cliente escanea</h3><p>Un código QR en la mesa abre tu carta digital al instante desde su celular.</p></article>
+          <article class="step-card"><span class="step-num">02</span><div class="step-visual step-explore"><svg viewBox="0 0 96 96" fill="none" aria-hidden="true"><rect x="25" y="9" width="46" height="78" rx="10" fill="#16372f"/><rect x="29" y="16" width="38" height="64" rx="5" fill="#fff5e9"/><circle cx="48" cy="74" r="2" fill="#a9b3ae"/><path d="M35 47c3-14 8-19 13-19s11 5 13 19H35Z" fill="#e9a45c"/><path d="M33 52h30M36 60h24" stroke="#668c63" stroke-width="5" stroke-linecap="round"/><path d="M35 65h27" stroke="#ca7a43" stroke-width="5" stroke-linecap="round"/><path d="M41 22h14" stroke="#1a3c33" stroke-width="2" stroke-linecap="round"/></svg></div><h3>Explora los platos</h3><p>Fotos, ingredientes y precios. Prueba ahora nuestra demostración de modelos 3D giratorios.</p></article>
+          <article class="step-card"><span class="step-num">03</span><div class="step-visual step-order"><svg viewBox="0 0 96 96" fill="none" aria-hidden="true"><path d="M48 16c-18 0-31 13-31 31 0 6 2 12 5 17l-4 16 17-4c4 2 9 3 13 3 18 0 31-13 31-31S66 16 48 16Z" fill="#d4eedc" stroke="#2e775c" stroke-width="3"/><path d="M37 34c2-2 4-1 5 1l3 6-3 4c3 5 6 8 11 10l4-3 7 4c2 2 1 4-1 6-2 2-6 3-10 1-10-4-19-12-22-23-1-3 3-6 6-6Z" fill="#267e58"/></svg></div><h3>Decide y hace el pedido</h3><p>El carrito prepara el mensaje de WhatsApp para que el cliente confirme el envío.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section features" id="beneficios"><div class="container features-layout"><div class="features-heading"><span class="section-tag">MUCHO MÁS QUE UN MENÚ</span><h2>Tu restaurante, <em>en otra dimensión.</em></h2><p>Herramientas prácticas para una carta fácil de consultar, atractiva de presentar y sencilla de mantener.</p><a href="#registro" class="button button-outline">Quiero conocerlo <span aria-hidden="true">↗</span></a><div class="features-deco"><span>✳</span><span>◌</span></div></div><div class="feature-grid">
+      <article class="feature-card"><span class="feature-icon orange">▦</span><h3>Menú QR al instante</h3><p>Tu carta siempre disponible en el celular, sin que tus comensales instalen nada.</p></article>
+      <article class="feature-card"><span class="feature-icon yellow">✦</span><h3>Platos en 3D <small>Demo disponible</small></h3><p>Prueba modelos que puedes girar y acercar. La realidad aumentada sigue en desarrollo.</p></article>
+      <article class="feature-card"><span class="feature-icon green">◉</span><h3>Pedidos por WhatsApp</h3><p>El cliente prepara su carrito y confirma el mensaje desde una aplicación familiar.</p></article>
+      <article class="feature-card"><span class="feature-icon pink">✎</span><h3>Precios actualizables</h3><p>Modifica productos, descripciones y disponibilidad desde un mismo lugar.</p></article>
+      <article class="feature-card"><span class="feature-icon peach">◇</span><h3>Promociones y combos <small>Próxima etapa</small></h3><p>Un espacio previsto para destacar ofertas y combinaciones especiales.</p></article>
+      <article class="feature-card"><span class="feature-icon mint">↗</span><h3>Información útil <small>Próxima etapa</small></h3><p>Estadísticas previstas para comprender qué productos atraen más interés.</p></article>
+    </div></div></section>
+
+    <section class="showcase showcase-3d" id="experiencia-3d">
+      <div class="container showcase-inner">
+        <div class="showcase-copy">
+          <span class="section-tag"><span class="live-dot"></span> PRUÉBALO AHORA · DEMO 3D</span>
+          <h2>El sabor se mira <em>desde todos los ángulos.</em></h2>
+          <p>Imagina que cada cliente pueda girar un plato antes de pedirlo. ¡Aquí puedes hacerlo! Arrastra el modelo, acércate a sus detalles y cambia de receta.</p>
+          <div class="model-selector" role="group" aria-label="Elegir plato 3D">
+            <button class="model-choice active" type="button" data-model="burger" aria-pressed="true"><span>🍔</span> Hamburguesa</button>
+            <button class="model-choice" type="button" data-model="pizza" aria-pressed="false"><span>🍕</span> Pizza artesanal</button>
+          </div>
+          <div class="model-toolbar">
+            <button type="button" id="model-spin" class="model-tool" disabled><span aria-hidden="true">Ⅱ</span> Pausar giro</button>
+            <button type="button" id="model-reset" class="model-tool" disabled><span aria-hidden="true">↺</span> Reiniciar vista</button>
+          </div>
+          <p class="gesture-tip">↔ Arrastra para girar <span aria-hidden="true">·</span> ⊕ Rueda o pellizca para acercar</p>
+          <div class="showcase-note"><span>✧</span><span>Son modelos 3D de demostración recreados a partir de nuestras imágenes de referencia, no conversiones fotográficas exactas. La experiencia de realidad aumentada aún está en desarrollo.</span></div>
+        </div>
+        <div class="model-experience">
+          <div class="model-stage" id="model-stage">
+            <span class="stage-glow" aria-hidden="true"></span>
+            <div class="viewer-canvas" id="platia-3d" tabindex="0" aria-label="Modelo tridimensional de una hamburguesa. Puedes girarlo y hacer zoom."></div>
+            <div class="model-placeholder" id="model-placeholder"><img id="placeholder-image" src="/assets/platia-burger-3d.png" width="450" height="320" alt="Referencia gastronómica de hamburguesa" /><p id="model-status" role="status">Cargando modelo interactivo…</p></div>
+            <span class="stage-chip"><span class="live-dot"></span> MODELO 3D REAL</span>
+            <span class="stage-counter" id="stage-counter">01 / 02</span>
+          </div>
+          <div class="reference-strip"><div class="reference-thumb"><img id="reference-image" src="/assets/platia-burger-3d.png" alt="Render original de hamburguesa usado como referencia del modelo 3D" width="120" height="90" /></div><div><span>RENDER DE REFERENCIA</span><strong id="reference-title">La Suprema · Hamburguesa</strong><small>De imagen ilustrativa a una pieza que puedes explorar en 360°.</small></div><span class="reference-icon" aria-hidden="true">✧</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section pricing" id="planes"><div class="container"><div class="section-head centered"><span class="section-tag">UN PLAN PARA CADA ETAPA</span><h2>Empieza pequeño. <em>Sorprende en grande.</em></h2><p>Precios mensuales propuestos para nuestra etapa de acceso anticipado. Elige el plan que te interesa; registrarte no genera ningún cobro.</p></div>
+      <div class="pricing-grid">
+        <article class="price-card"><div class="price-top"><span class="plan-name">ESENCIAL</span><span class="plan-subtitle">El primer paso digital</span></div><div class="price"><span>Bs</span><strong>29</strong><small>/ mes</small></div><p>Para pequeños negocios que quieren dejar atrás la carta en papel.</p><a href="#registro" class="button button-price" data-plan="esencial">Elegir Esencial <span aria-hidden="true">↗</span></a><div class="price-divider"></div><span class="included">FUNCIONES PROPUESTAS</span><ul class="check-list"><li>Menú digital con código QR</li><li>Fotos, precios y descripciones</li><li>Actualización de productos</li><li>Acceso desde cualquier celular</li></ul></article>
+        <article class="price-card featured"><div class="popular-ribbon">MÁS VERSÁTIL <span>✦</span></div><div class="price-top"><span class="plan-name">INTERACTIVO</span><span class="plan-subtitle">Para una atención más ágil</span></div><div class="price"><span>Bs</span><strong>49</strong><small>/ mes</small></div><p>Para restaurantes que buscan simplificar la experiencia de pedido.</p><a href="#registro" class="button button-coral button-price" data-plan="interactivo">Elegir Interactivo <span aria-hidden="true">↗</span></a><div class="price-divider"></div><span class="included">TODO LO ESENCIAL, MÁS</span><ul class="check-list"><li>Carrito digital de pedidos</li><li>Mensaje preparado para WhatsApp</li><li>Control de disponibilidad</li><li>Experiencia de compra más fluida</li></ul></article>
+        <article class="price-card"><div class="price-top"><span class="plan-name">INMERSIVO</span><span class="plan-subtitle">Tu propuesta más visual</span></div><div class="price"><span>Bs</span><strong>99</strong><small>/ mes</small></div><p>Para marcas que desean diferenciarse con experiencias gastronómicas 3D.</p><a href="#registro" class="button button-price" data-plan="inmersivo">Elegir Inmersivo <span aria-hidden="true">↗</span></a><div class="price-divider"></div><span class="included">TODO LO INTERACTIVO, MÁS</span><ul class="check-list"><li>Visualización de platos en 3D <small>(beta)</small></li><li>Realidad aumentada compatible <small>(beta)</small></li><li>Demostraciones de modelos 3D</li><li>Experiencia visual diferenciadora</li></ul></article>
+      </div>
+      <p class="pricing-disclaimer">* Planes y funcionalidades sujetos a validación y disponibilidad. La creación de modelos 3D personalizados se cotizaría por separado. Esta página recoge interesados; no acepta pagos ni activa suscripciones.</p>
+    </div></section>
+
+    <section class="faq section" id="preguntas"><div class="container faq-layout"><div><span class="section-tag">PREGUNTAS FRECUENTES</span><h2>Todo claro desde el <em>primer clic.</em></h2><p>Si estás pensando en digitalizar tu carta, estas respuestas te ayudarán.</p><a href="#registro" class="text-link faq-link">¿Listo para probar? Inscríbete <span aria-hidden="true">↗</span></a></div><div class="faq-list"><details><summary>¿El registro tiene algún costo? <span>+</span></summary><p>No. Registrar tu interés es gratuito y no se realiza ningún cobro. Los importes mostrados son precios mensuales propuestos para validar los planes.</p></details><details><summary>¿Mis clientes necesitan descargar una app? <span>+</span></summary><p>No. La propuesta permite abrir el menú desde un código QR usando el navegador del celular.</p></details><details><summary>¿El 3D y la realidad aumentada ya funcionan? <span>+</span></summary><p>Ya puedes probar aquí dos modelos 3D interactivos y giratorios de demostración. La creación de modelos personalizados y la realidad aumentada siguen en desarrollo; los modelos exclusivos podrían tener un costo adicional.</p></details><details><summary>¿Cómo se realizan los pedidos? <span>+</span></summary><p>El carrito del menú prepara un mensaje para WhatsApp. El comensal debe revisar y enviar ese mensaje; no representa por sí solo un pedido confirmado.</p></details><details><summary>¿Cuándo podré utilizar el servicio? <span>+</span></summary><p>Estamos reuniendo negocios interesados para una validación piloto. Tras registrarte, te contactaremos con información de avances y disponibilidad, sin garantizar una fecha de lanzamiento.</p></details></div></div></section>
+
+    <section class="registration" id="registro"><div class="container register-grid"><div class="register-copy"><span class="section-tag light">ACCESO ANTICIPADO</span><h2>El próximo gran plato puede empezar <em>aquí.</em></h2><p>Queremos conocer tu negocio y saber qué plan te interesa. Déjanos tus datos para participar en las próximas pruebas de PLATIA.</p><ul><li><span>✓</span> Registro totalmente gratuito</li><li><span>✓</span> Sin compromiso de pago</li><li><span>✓</span> Información sobre novedades del proyecto</li></ul><div class="register-mark">PLA<span>TIA</span><i>✳</i></div></div>
+      <div class="form-card"><div class="form-title"><span class="form-icon">✳</span><div><h3>Quiero ser de los primeros</h3><p>Completa tus datos en menos de un minuto.</p></div></div>
+        <form id="lead-form" novalidate>
+          <div class="form-row"><div class="field"><label for="nombre">Tu nombre <span>*</span></label><input id="nombre" name="nombre" required minlength="2" maxlength="100" autocomplete="name" placeholder="Ej. María López" /></div><div class="field"><label for="negocio">Nombre del negocio <span>*</span></label><input id="negocio" name="negocio" required minlength="2" maxlength="120" autocomplete="organization" placeholder="Ej. Café Central" /></div></div>
+          <div class="form-row"><div class="field"><label for="email">Correo electrónico <span>*</span></label><input id="email" name="email" type="email" required maxlength="180" autocomplete="email" placeholder="hola@negocio.com" /></div><div class="field"><label for="telefono">Celular / WhatsApp <span>*</span></label><input id="telefono" name="telefono" type="tel" required maxlength="20" autocomplete="tel" placeholder="+591 7XXXXXXX" /></div></div>
+          <div class="field"><label for="ciudad">Ciudad <span>*</span></label><input id="ciudad" name="ciudad" required maxlength="80" value="Tarija" placeholder="Tu ciudad" /></div>
+          <fieldset class="plan-fieldset"><legend>¿Qué plan te interesa? <span>*</span></legend><div class="plan-options"><label class="plan-option"><input type="radio" name="plan" value="esencial" required /><span><strong>Esencial</strong><small>Bs 29 / mes</small></span></label><label class="plan-option"><input type="radio" name="plan" value="interactivo" checked /><span><strong>Interactivo</strong><small>Bs 49 / mes</small></span></label><label class="plan-option"><input type="radio" name="plan" value="inmersivo" /><span><strong>Inmersivo</strong><small>Bs 99 / mes</small></span></label></div></fieldset>
+          <div class="honeypot" aria-hidden="true"><label for="empresa_web">Sitio de empresa</label><input id="empresa_web" name="empresa_web" tabindex="-1" autocomplete="off" /></div>
+          <label class="check-field"><input type="checkbox" id="consentimiento" name="consentimiento" required /><span>Acepto que PLATIA guarde mis datos para responder sobre mi solicitud y las pruebas del proyecto. <strong>*</strong></span></label>
+          <label class="check-field"><input type="checkbox" id="consentimiento_sms" name="consentimiento_sms" /><span>También deseo recibir un SMS informativo de confirmación, si el servicio está disponible. (Opcional)</span></label>
+          <button class="button button-coral submit-button" type="submit"><span class="submit-text">Enviar mi inscripción</span><span class="submit-arrow" aria-hidden="true">↗</span></button>
+          <p class="form-feedback" id="form-feedback" role="status" aria-live="polite"></p>
+          <p class="form-legal"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M6 10V7a6 6 0 0 1 12 0v3M5 10h14v11H5z" stroke="currentColor" stroke-width="2" fill="none" stroke-linejoin="round"/></svg> Tus datos se usarán únicamente para gestionar el interés en PLATIA. Puedes solicitar su eliminación respondiendo a nuestra comunicación.</p>
+        </form>
+      </div>
+    </div></section>
+  </main>
+
+  <footer class="footer"><div class="container footer-top"><div><a href="#inicio" class="brand footer-brand"><span class="brand-symbol" aria-hidden="true">✳</span><span>PLA<span class="brand-accent">TIA</span><small>GASTRONOMÍA DIGITAL</small></span></a><p>Una nueva forma de descubrir sabores, pensada para restaurantes que miran hacia el futuro.</p></div><div class="footer-links"><div><strong>EXPLORA</strong><a href="#como-funciona">Cómo funciona</a><a href="#beneficios">Beneficios</a><a href="#planes">Planes</a></div><div><strong>PARTICIPA</strong><a href="#registro">Acceso anticipado</a><a href="#preguntas">Preguntas frecuentes</a></div></div></div><div class="container footer-bottom"><span>© <span id="year">2026</span> PLATIA. Proyecto SaaS gastronómico en validación.</span><span>Diseñado con pasión por la gastronomía <span aria-hidden="true">✦</span> Bolivia</span></div></footer>
+</body>
+</html>

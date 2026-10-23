@@ -1,0 +1,12 @@
+{
+  "name": "platia-landing",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Landing de acceso anticipado de PLATIA: HTML, CSS, JavaScript, Supabase y Twilio.",
+  "scripts": {
+    "test": "node --test",
+    "serve:static": "npx serve ."
+  },
+  "engines": { "node": ">=20" }
+}
